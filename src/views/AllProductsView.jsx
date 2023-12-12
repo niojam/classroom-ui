@@ -1,30 +1,25 @@
 import ProductCard from "../componetns/card/ProductCard.jsx";
+import {useEffect, useState} from "react";
+import {ProductClient} from "../api/ProductClientApi.js";
 
 function AllProductsView() {
 
-    const mockData = [
-        {
-            id: 1,
-            name: "testname",
-            description: "Some quick example text to build on the card title and make up the\n" +
-                "                        bulk of the card's content."
-        },
-        {
-            id: 2,
-            name: "Second product",
-            description: "Product  Description: the beeeest."
-        },
-        {
-            id: 3,
-            name: "Secasdsdond product",
-            description: "Product  sadasdsadasdDescription: the beeeest."
-        },
-    ]
+    const [products, setProducts] = useState([]);
+
+    const loadProducts = async () => {
+        const response = await ProductClient.getAllProducts();
+
+        setProducts(response.data);
+    }
+
+    useEffect(() => {
+        loadProducts();
+    }, [])
 
     return (
         <div className="mt-5">
             {
-                mockData.map(product => {
+                products.map(product => {
                     return (
                         <div key={`product-${product.id}`} className="mb-3">
                             <ProductCard  product={product}/>

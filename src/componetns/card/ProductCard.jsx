@@ -1,4 +1,5 @@
 import {Card} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 
 function ProductCard({product}) {
     return (
@@ -8,8 +9,7 @@ function ProductCard({product}) {
                     <Card.Text>
                         {product.description}
                     </Card.Text>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
+                    <NavLink className="nav-link" to={`/product/${product.id}/edit`}>Click to edit</NavLink>
                 </Card.Body>
             </Card>
     )
